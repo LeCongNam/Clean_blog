@@ -1,0 +1,39 @@
+<%- include layouts/header.ejs %> 
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/img/<%- posts.image %>')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <!-- title -->
+            <h1> <%- posts.title %> </h1>
+            <!-- subtitle -->
+            <span class="subheading"><%- posts.subtitle %></span>
+            <div class="mt-lg-3"></div>
+            <p class="m-lg-auto description">Tác giả <b><%- posts.author %></b></p>
+            <p class="timestamp">viết vào  <%- posts.createdAt.toDateString() %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <!-- content -->
+        <p>
+          <%- posts.content %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  
+
+  <%- include layouts/footer.ejs %> 

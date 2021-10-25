@@ -1,0 +1,19 @@
+.description {
+  font-size: 16px;
+}
+
+.timestamp {
+  color: #00c3ff;
+  text-shadow: 1px 1px 1px black;
+}
+
+.avatar {
+  background-image: url("/img/avt.jpg");
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+/*# sourceMappingURL=app.css.map */
