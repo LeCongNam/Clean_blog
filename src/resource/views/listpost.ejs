@@ -1,0 +1,81 @@
+<%- include layouts/header.ejs %>
+
+    <% if(typeof posts[0] != 'undefined' ){ %>
+
+    <header class="masthead" style="background-image: url('img/<%- posts[0].image %>')">
+  <% } else{ %>
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    
+  <% } %> 
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Clean Blog</h1>
+            <span class="subheading">Blog code by Le cong nam</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+<div class="container">
+    
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Stt</th>
+            <th scope="col">Tiêu đề </th>
+            <th scope="col">Tên thay thế</th>
+            <th scope="col">Tác giả</th>
+            <th scope="col">Ngày  tạo</th>
+            <th scope="col" colspan="2">hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% posts.forEach(function(post,index){ %>
+                <tr>
+                    <th scope="row"><%- index+1 %> </th>
+                    <td><%- post.title %> </td>
+                    <td><%- post.subtitle %> </td>
+                    <td><%- post.author %> </td>
+                    <td><%= post.createdAt.toDateString() %> </td>
+                    <td>
+                        <a  href="/author/edit/<%- post._id %>" class="btn btn-info">Chỉnh sửa</a>
+                        <a  onclick="deleteUsr('<%- post._id %>')" class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i>
+                          Xóa
+                        </a>
+                    </td>
+                </tr>
+
+        <% }); %>
+    </tbody>
+</table>
+
+</div>
+
+
+<script>
+    function deleteUsr(id) {
+        Swal.fire({
+            title: 'Do you want to Delete?',
+            showDenyButton: true,
+            confirmButtonText: 'Xóa',
+            denyButtonText: `Hủy`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire('Xóa thành công!', '', 'success')
+                window.location.href= `/delete/${id}`;
+            } else if (result.isDenied) {
+                Swal.fire('Bạn đã hủy', '', 'warning')
+            }
+        })
+    }
+
+
+
+    
+</script>
+<%- include layouts/footer.ejs %>

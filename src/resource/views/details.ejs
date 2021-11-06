@@ -1,0 +1,143 @@
+<%- include layouts/header.ejs %>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/img/<%- posts.image %>')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <!-- title -->
+                        <h1>
+                            <%- posts.title %>
+                        </h1>
+                        <!-- subtitle -->
+                        <span class="subheading">
+                            <%- posts.subtitle %>
+                        </span>
+                        <div class="mt-lg-3"></div>
+                        <p class="m-lg-auto description">Author <b>
+                                <%- posts.author %>
+                            </b></p>
+                        <p class="timestamp">Post created in <%- posts.createdAt.toDateString() %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <form action="/author/heart" name="heartForm" method="post">
+                <input type="number" name="heart" value="1" id="" hidden>
+                <input type="text" value="<%- posts._id %>" name="idpost" id="" hidden>
+                Yêu thích
+                <i class="far fa-heart heart" style="cursor: pointer;font-size: 25px;"></i>
+
+            </form>
+            <div class="ml-5">
+                <span>Bài viết có <b>
+                        <%- posts.heart %>
+                    </b> lượt thích</span>
+            </div>
+            <div class="ml-3">
+                <form action="/users/follow" method="post">
+                    <input type="text" value="<%-posts.author%>" name="follow" id="" hidden>
+                    <button class="btn btn-primary" >Follow</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <!-- content -->
+                <p>
+                    <%- posts.content %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span>Chất lượng bài viết: </span>
+                <div class="vote_star">
+                    <i class="far fa-star star_vote" data-star="1"></i>
+                    <i class="far fa-star star_vote" data-star="2"></i>
+                    <i class="far fa-star star_vote" data-star="3"></i>
+                    <i class="far fa-star star_vote" data-star="4"></i>
+                    <i class="far fa-star star_vote mr-3" data-star="5"></i>
+
+                    Bạn đã đánh giá <span class="star_now"></span> sao
+                </div>
+                
+                <div>
+                    <span> Bài viết này đạt <%- totalStart %> sao</span>
+                </div>
+            </div>
+
+            <!-- form start hidden -->
+            <form action="/author/vote" name="starUpVote" method="post">
+                <input type="text" value="<%- posts._id %>" name="idpost" id="" hidden>
+                <input type="number" name="totalStar" id="totalStar" hidden>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var heartSymbol = document.querySelector('.heart')
+        var formHeart = document.forms['heartForm']
+        var starVote = document.getElementsByClassName('star_vote')
+        var formStartVore = document.forms['starUpVote']
+        var inputStarForm = document.getElementById('totalStar')
+        var startUser = document.querySelector('.star_now')
+
+        heartSymbol.onclick = function () {
+            heartSymbol.style.color = 'red';
+            window.localStorage.setItem('upvote', '1')
+            formHeart.submit();
+        }
+
+        if (window.localStorage.getItem('upvote') == 1) {
+            heartSymbol.classList.add = 'fas'
+            formHeart.style.color = 'red'
+        }
+
+
+
+        for (const starEle of starVote) {
+            starEle.addEventListener('click', function (e) {
+                let userVoteStar = this.dataset.star
+
+                for (let i = 0; i < userVoteStar; i++) {
+                    starVote[i].classList.remove('far')
+                    starVote[i].classList.add('fas')
+                    starVote[i].style.color = 'yellow'
+                }
+                window.localStorage.setItem('startVote', JSON.stringify(userVoteStar))
+                inputStarForm.value = `${userVoteStar}`
+                formStartVore.submit();
+            })
+        }
+
+        function highLightStart() {
+            if (window.localStorage.getItem('startVote') != '') {
+
+                let userVoteStar = JSON.parse(window.localStorage.getItem('startVote'))
+                startUser.textContent= userVoteStar
+                for (const starEle of starVote) {
+                    for (let i = 0; i < userVoteStar; i++) {
+                        starVote[i].classList.remove('far')
+                        starVote[i].classList.add('fas')
+                        starVote[i].style.color = 'yellow'
+                    }
+                }
+            }
+        }
+        highLightStart()
+
+    </script>
+
+    <%- include layouts/footer.ejs %>

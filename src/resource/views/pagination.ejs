@@ -1,0 +1,157 @@
+<%- include('layouts/header.ejs') %>
+
+
+
+
+    <% if(typeof allPost[0] !='undefined' ){ %>
+        <!-- Page Header -->
+        <header class="masthead" style="background-image: url('/img/<%- allPost[0].image %>')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="site-heading">
+                            <h1>Clean Blog</h1>
+                            <span class="subheading">Blog code by Le cong nam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <% allPost.forEach(function(post){ %>
+                        <!-- start post -->
+                        <div class="post-preview">
+                            <a href="/details/<%- post._id %>">
+                                <h2 class="post-title">
+                                    <%- post.title %>
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    <%- post.subtitle %>
+                                </h3>
+                            </a>
+                            <p class="post-meta">Posted by
+                                <a href="/author/<%- post.author %>">
+                                    <%- post.author %>
+                                </a>
+                                on
+                                <%= post.createdAt.toDateString() %>
+                            </p>
+                        </div>
+                        <hr>
+                        <% }) %>
+
+                            <%} else if (typeof allPost._id=='undefined' ){ %>
+                                <!-- Page Header -->
+                                <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+                                    <div class="overlay"></div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-10 mx-auto">
+                                                <div class="site-heading">
+                                                    <h1>Clean Blog 1</h1>
+                                                    <span class="subheading">Blog code by Le cong nam</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+
+
+                                <div class="post-preview">
+                                    <div class="container">
+                                        <div class="row">
+                                            <h1 class="m-lg-auto">Bạn chưa có bài viết nào.
+                                                <a href="/create">Tạo ngay <i class="fas fa-pen-fancy"></i></a>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            <% } %>
+
+                            <!-- Page Pagination -->
+                            <div class="clearfix">
+                                <!-- pages =1 => disabled 
+                                    <>ngược lại hiện link trang 1 
+                                -->
+                            <% if(pages> 0){ %> 
+                                <nav class="mx-auto">
+                                    <ul class="pagination">
+                                         <!-- first item -->
+                                    <% if(currentPage==1){ %>
+                                        <li class="page-item disabled">
+                                            <a href="" class="page-link">First</a>
+                                        </li>
+                                    <% }else{ %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/pagination/1">First</a>
+                                        </li>                                                
+                            <% } %> 
+                            
+                            <!-- nếu currpage >3 đúng => curr -2= 1 <> lấy 1
+                             ...Items -->
+                            <% var i=(Number(currentPage)>3) ? Number(currentPage)-2:1 %>
+                            <!-- i !=1 -->
+                                <% if (i!== 1){ %>
+                                    <li class="page-item disabled">
+                                        <a href="#" class="page-link">...</a>
+                                    </li>
+                                <% } %>                                      
+                                <% for(;i<=(Number(currentPage)+2) && i<=pages;i++){ %>
+                                    <% if(i==currentPage ){ %>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="/pagination/<%=i %>">
+                                                <%=i %>
+                                            </a>
+                                        </li>
+                                    <% } else { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/pagination/<%=i  %>">
+                                                <%=i %>
+                                                </a>
+                                            </li>
+                                    <% } %>   
+
+                                        <% if(i==(Number(currentPage)+2) && (i< pages) ){ %>
+                                            <li class="page-item disabled">
+                                                <a href="#" class="page-link">...</a>
+                                            </li>
+                                        <% } %>
+                                    <% } %>      
+
+                                    <!-- Last Items -->
+                                    <% if(currentPage==pages){ %>
+                                        <li class="page-item disabled" >
+                                            <a class="page-link">
+                                                Last
+                                            </a>
+                                        </li>
+                                    <% }else { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/pagination/<%=pages %>/ ">
+                                                Last
+                                            </a>
+                                        </li>
+                                        <% } %>                                                       
+                                    </ul>
+                                </nav>
+                         <% } %>  
+                    </div>
+                </div>
+            </div>
+        </div>                                                                                
+        <hr>                                                                                                       
+    
+        <!-- Footer -->
+    <%- include('layouts/footer.ejs') %>                                                                       
+            
+
+        
+
+
+        

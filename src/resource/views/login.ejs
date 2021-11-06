@@ -1,0 +1,63 @@
+<%- include layouts/header.ejs %>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Đăng nhập Blog</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+      
+        <!-- Form tạo bài  viết  mới -->
+        <form method="post" action="/users/login" encType="multipart/form-data" name="sentMessage" id="contactForm">
+
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" placeholder="user@email.com" id="email" required>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="password" class="form-control" id="phone" required >
+            </div>
+          </div>
+          <br>
+          <hr>
+
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Đăng nhập</button>
+        </form>
+        <!-- end form Register -->
+
+      </div>
+    </div>
+  </div>
+  <hr>
+
+
+  </footer>
+
+  <script>
+    CKEDITOR.replace('content');
+    CKEDITOR.config.autoParagraph = false;
+    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_P;
+
+  </script>
+
+  <%- include layouts/footer.ejs %>

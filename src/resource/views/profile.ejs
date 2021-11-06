@@ -1,0 +1,81 @@
+<%- include layouts/header.ejs %>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Thông  tin cá nhân</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <table class="table table-bordered table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Họ tên</th>
+              <th scope="col">Email</th>
+              <th scope="col">Ngày đăng nhập</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th > </th>
+              <td scope="row"><%- user.username %></td>
+              <td><%- user.email %></td>
+              <td><%- user.createdAt.toDateString() %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          Tác giả đang follow
+          <table class="table table-bordered table-dark">
+            <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Họ tên tác giả follow</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+              <% let follow = user.follow
+               follow.forEach(function(fl,index){ %>
+              <tr>
+                <th > <%- index+1 %></th>
+                <td scope="row"><%- fl %></td>
+              </tr>
+              <% }) %> 
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+
+  </footer>
+
+  <script>
+    CKEDITOR.replace('content');
+    CKEDITOR.config.autoParagraph = false;
+    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_P;
+
+  </script>
+
+  <%- include layouts/footer.ejs %>

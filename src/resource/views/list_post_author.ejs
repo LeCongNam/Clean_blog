@@ -1,0 +1,103 @@
+<%- include layouts/header.ejs %>
+
+
+
+
+<% if(typeof posts[0] != 'undefined' ){ %> 
+ 
+    <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/<%- posts[0].image %>')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Tổng hợp bài viết </h1>
+              <span class="subheading">
+                Bài viết của tác giả 
+                <span style="text-transform: uppercase;color: #6dd5ed;"><%- posts[0].author %> </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <!-- start post -->
+
+          <% posts.forEach(function(post){ %>
+            <div class="post-preview">
+              <a href="/details/<%- post._id %>">
+                <h2 class="post-title">
+                  <%- post.title %>
+                </h2>
+                <h3 class="post-subtitle">
+                  <%- post.subtitle %>
+                </h3>
+              </a>
+              <p class="post-meta">Posted by
+                <a href="/author/<%- post.author %>" style="font-weight: bold;text-transform: uppercase;">
+                  <%- post.author %>
+                </a>
+                on <%= post.createdAt.toDateString() %>
+              </p>
+            </div>
+            <hr>
+
+            <% }); %>
+
+
+            <%} else if (typeof posts._id =='undefined'  ){ %>
+
+                
+                <!-- Page Header -->
+                <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+                  <div class="overlay"></div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="site-heading">
+                          <h1>Clean Blog 1</h1>
+                          <span class="subheading">Blog code by Le cong nam</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </header>
+
+
+                <div class="post-preview">
+                  <div class="container">
+                    <div class="row">
+                      <h1 class="m-lg-auto">Tác giả chưa có bài viết nào.
+                        <a href="/create">Tạo ngay <i class="fas fa-pen-fancy"></i></a> </h1>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <% } %>
+
+                  <!-- Pager -->
+                  <div class="clearfix">
+                    <% if(currentPage>1){ var page = parseInt(currentPage) -1 %> 
+
+                    <a class="btn btn-primary float-left" href="?page=<%=page  %> ">&#8592; Previous Page </a>
+                    
+                    <% } if(currentPage< lastPage){ page = parseInt(currentPage) +1 %> 
+                      <a class="btn btn-primary float-right" href="?page=<%=page  %> ">Next Page &rarr;</a>
+
+                      <% } %> 
+                  </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    
+
+    <%- include layouts/footer.ejs %>

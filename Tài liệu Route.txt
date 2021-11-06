@@ -1,0 +1,3 @@
+- Đây là tài liêu tham khảo viết Route() Express V4 hợp lệ. Cách của thầy  là cách cũ V3
+Tạo ra 1 file mới cho 1 Route()
+https://expressjs.com/en/guide/migrating-4.html
