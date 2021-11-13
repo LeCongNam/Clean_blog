@@ -51,6 +51,10 @@ class UserController {
         })
     }
 
+    logout(req, res, next) {
+        req.session.userId= undefined;
+        res.redirect('/')
+    }
 
 }
 
