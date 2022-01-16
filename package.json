@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "watch": "sass --watch resource/scss:public/css",
     "lint": " ejslint views/profile.ejs -d"
   },
