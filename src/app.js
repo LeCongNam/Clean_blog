@@ -23,7 +23,7 @@ app.use(session({
     secret: 'keboard cat',
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://lecongnam:Vobichuyen0612@cluster0.j3gct.mongodb.net/clean_blog?retryWrites=true&w=majority/clean_blog' })
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://lecongnam:Vobichuyen0612@cluster0.j3gct.mongodb.net/clean_blog' })
 }))
 
 // static file
