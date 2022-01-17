@@ -1,20 +1,22 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const fileUpload = require('express-fileupload');
-const app = express();
+const cookieParser = require('cookie-parser');
 const db = require('./model/connect');
 require('dotenv').config()
-const Route = require('./routes/route')
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const app = express();
+
 
 
 // connect database
 db.connect();
+
+
+const fileUpload = require('express-fileupload');
+const Route = require('./routes/route')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 // express session
 app.use(session({
